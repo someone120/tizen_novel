@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <title>List</title>
+    <link rel="stylesheet" href="lib/tau/wearable/theme/default/tau.min.css">
+    <link rel="stylesheet" media="all and (-tizen-geometric-shape: circle)" href="lib/tau/wearable/theme/default/tau.circle.min.css">
+    <!-- load theme file for your application -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+
+<div class="ui-page ui-page-active" id="pageCircleProgressBar" data-enable-page-scroll="false">
+   <header class="ui-header">
+      <h2 class="ui-title">Circle Progress</h2>
+   </header>
+   <div class="ui-content content-padding">
+      <div class="result" id="result"></div>
+   </div>
+   <progress class="ui-circle-progress" id="circleprogress" max="100" value="20"></progress>
+
+	<script src="lib/tau/wearable/js/tau.min.js"></script>
+	   <script src="js/progress.js"></script>
+</div>
