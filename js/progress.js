@@ -87,11 +87,14 @@ index.close()
 
 	window.addEventListener('tizenhwkey', function(ev) {
         if (ev.keyName === 'back') {
+		if(offset/length*100 == progressBarWidget.value()){
+			return;
+		}
         	console.log("documents/books/"+dest+ ".idx");
         	var index = tizen.filesystem.openFile("documents/books/"+dest+ ".idx", "w");
         	console.log(length*progressBarWidget.value()/100 + "/" + length)
-       	 index.writeString(length*progressBarWidget.value()/100 + "/" + length);
-            index.close();
+		index.writeString(length*progressBarWidget.value()/100 + "/" + length);
+		index.close();
             var page = document.getElementsByClassName('ui-page-active')[1],
                 pageid = page ? page.id : '';
 
