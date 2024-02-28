@@ -80,7 +80,7 @@
 
     function readContent(file, offset, length) {
         file.seek(offset);
-        return file.readString(length)
+        return file.readString(length).replace("\n","</br>")
     }
     var dest = decodeURI(location.hash.replace("#", ""));
     if(dest==""){
