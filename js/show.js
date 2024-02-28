@@ -222,7 +222,7 @@
       switch (direction) {
          
           case 3:
-        	  location.replace("progress.html#"+dest);
+        	  location.href="progress.html#"+dest;
               break;
           }
   }, false);
