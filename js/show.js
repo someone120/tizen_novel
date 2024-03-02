@@ -26,7 +26,7 @@
 
             var index = tizen.filesystem.openFile(file + ".idx", "w");
             var filea = tizen.filesystem.openFile(file, "r");
-            var output = filea.readString()
+            var output = filea.readData()
             console.log("File content: " + output.length);
             index.writeString("0/" + output.length)
             index.close();
@@ -47,7 +47,7 @@
 
             var index = tizen.filesystem.openFile(file + ".idx", "w");
             var filea = tizen.filesystem.openFile(file, "r");
-            var output = filea.readString()
+            var output = filea.readData()
             console.log("File content: " + output.length);
             index.writeString("0/" + output.length)
             index.close();
@@ -55,7 +55,20 @@
         }
         return parseInt(offset);
     }
-
+    function encodeUtf8(text) {
+        const code = encodeURIComponent(text);
+        const bytes = [];
+        for (var i = 0; i < code.length; i++) {
+            const c = code.charAt(i);
+            if (c === '%') {
+                const hex = code.charAt(i + 1) + code.charAt(i + 2);
+                const hexVal = parseInt(hex, 16);
+                bytes.push(hexVal);
+                i += 2;
+            } else bytes.push(c.charCodeAt(0));
+        }
+        return bytes;
+    }
     function setOffset(file, offset) {
 
         try {
@@ -69,7 +82,7 @@
         } catch (e) {
             var index = tizen.filesystem.openFile(file + ".idx", "w");
             var filea = tizen.filesystem.openFile(file, "r");
-            var output = filea.readString()
+            var output = filea.readData()
             console.log("File content: " + output.length);
             index.writeString("0/" + output.length)
             index.close();
@@ -80,8 +93,9 @@
 
     function readContent(file, offset, length) {
         file.seek(offset);
-        return file.readString(length).replace("\n","</br>")
+        return file.readString(length);
     }
+    var a=0;
     var dest = decodeURI(location.hash.replace("#", ""));
     if(dest==""){
     	dest=localStorage.getItem("dest");
@@ -98,7 +112,7 @@
 //        }
         document.getElementById("content").innerHTML = "";
         
-       
+       offset +=a;
         var content = readContent(file, offset, readLenght);
 
         for(i=0;i<content.length;i++){
@@ -106,8 +120,9 @@
         	document.getElementById("content").innerHTML += content.split("")[i]; 
         	if( document.getElementById("content").getClientRects().length>linemax){
         		document.getElementById("content").innerHTML = origin;
-        		offset += i;
-        		break
+        		
+        		a = encodeUtf8(origin).length;
+        		break;
         	 }
         }
         setOffset("documents/books/" + dest, offset);
@@ -136,14 +151,14 @@
         
         
         var content = readContent(file, offset, readLenght);
-
+        offset -= a
         for(i=0;i<content.length;i++){
         	var origin= document.getElementById("content").innerHTML
         	document.getElementById("content").innerHTML += content.split("")[i]; 
         	if( document.getElementById("content").getClientRects().length>linemax){
         		document.getElementById("content").innerHTML = origin;
-        		offset -= i;
-        		break
+        		a = encodeUtf8(origin).length;
+        		break;
         	 }
         }
         setOffset("documents/books/" + dest, offset);
