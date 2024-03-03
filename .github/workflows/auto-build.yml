@@ -14,7 +14,7 @@ jobs:
         id: tizen-build-action
         uses: sourcetoad/tizen-build-action@v1.0.0
         with:
-          project-dir: ${{ github.workspace }}/TizenApp
+          project-dir: ${{ github.workspace }}
           author-key: ${{ secrets.TIZEN_AUTHOR_KEY }}
           author-password: ${{ secrets.TIZEN_AUTHOR_KEY_PW }}
 
