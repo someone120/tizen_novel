@@ -8,6 +8,8 @@ jobs:
     name: build
     runs-on: ubuntu-latest
     steps:
+      - name: Check out repo
+        uses: actions/checkout@v2
       - name: Build Tizen app
         id: tizen-build-action
         uses: sourcetoad/tizen-build-action@v1.0.0
