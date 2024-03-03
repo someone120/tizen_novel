@@ -1,0 +1,23 @@
+name: build
+on:
+  push:
+    branch: [main]
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build Tizen app
+        id: tizen-build-action
+        uses: sourcetoad/tizen-build-action@v1.0.0
+        with:
+          project-dir: ${{ github.workspace }}/TizenApp
+          author-key: ${{ secrets.TIZEN_AUTHOR_KEY }}
+          author-password: ${{ secrets.TIZEN_AUTHOR_KEY_PW }}
+
+      - name: Upload Tizen package artifact
+        uses: actions/upload-artifact@v2
+        with:
+           name: app-${{ github.sha }}.wgt
+           path: ${{ steps.tizen-build-action.outputs.package-artifact }}
