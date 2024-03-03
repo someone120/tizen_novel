@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Build Tizen app
         id: tizen-build-action
-        uses: someone120/tizen-build-action@v1.0.0
+        uses: sourcetoad/tizen-build-action@v1.1.1
         with:
           project-dir: ${{ github.workspace }}
           author-key: ${{ secrets.TIZEN_AUTHOR_KEY }}
