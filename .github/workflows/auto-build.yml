@@ -10,6 +10,7 @@ jobs:
     steps:
       - name: Check out repo
         uses: actions/checkout@v2
+      - run: mkdir .buildResult
       - name: Build Tizen app
         id: tizen-build-action
         uses: sourcetoad/tizen-build-action@v1.1.1
