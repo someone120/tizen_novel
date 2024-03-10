@@ -13,7 +13,7 @@ jobs:
       - run: mkdir .buildResult
       - name: Build Tizen app
         id: tizen-build-action
-        uses: someone120/tizen-build-action@v1.1.0
+        uses: someone120/tizen-build-action@v1.1.1
         with:
           project-dir: ${{ github.workspace }}
           author-key: ${{ secrets.TIZEN_AUTHOR_KEY }}
