@@ -15,7 +15,7 @@ jobs:
       - run: mkdir .buildResult
       - name: Build Tizen app
         id: tizen-build-action
-        uses: someone120/tizen-build-action@v1.1.10
+        uses: someone120/tizen-build-action@v1.1.11
         with:
           project-dir: ${{ github.workspace }}/A
           author-key: ${{ secrets.TIZEN_AUTHOR_KEY }}
@@ -27,3 +27,8 @@ jobs:
         with:
            name: app-${{ github.sha }}.wgt
            path: ${{ steps.tizen-build-action.outputs.package-artifact }}
+      - name: Cache Tizen Studio installer
+        uses: actions/cache@v2
+        with:
+           path: ${{ github.workspace }}/tizen-studio_*.bin
+           key: tizen-studio-installer
