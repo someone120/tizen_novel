@@ -10,12 +10,14 @@ jobs:
     steps:
       - name: Check out repo
         uses: actions/checkout@v2
+        with:
+          path:  ${{ github.workspace }}/A
       - run: mkdir .buildResult
       - name: Build Tizen app
         id: tizen-build-action
-        uses: someone120/tizen-build-action@v1.1.2
+        uses: sourcetoad/tizen-build-action@v1.1.1
         with:
-          project-dir: ${{ github.workspace }}
+          project-dir: ${{ github.workspace }}/A
           author-key: ${{ secrets.TIZEN_AUTHOR_KEY }}
           author-password: ${{ secrets.TIZEN_AUTHOR_KEY_PW }}
 
