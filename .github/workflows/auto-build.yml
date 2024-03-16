@@ -20,6 +20,7 @@ jobs:
           project-dir: ${{ github.workspace }}/A
           author-key: ${{ secrets.TIZEN_AUTHOR_KEY }}
           author-password: ${{ secrets.TIZEN_AUTHOR_KEY_PW }}
+          distributor-cert: ${{secrets.DISTRIBUTOR_CERT}}
 
       - name: Upload Tizen package artifact
         uses: actions/upload-artifact@v2
