@@ -4,6 +4,7 @@
         minusBtn = document.getElementById('minus'),
         plusBtn = document.getElementById('plus'),
         resultDiv = document.getElementById('result'),
+        originDiv = document.getElementById('origin'),
         isCircle = tau.support.shape.circle,
         progressBarWidget,
         resultText,
@@ -87,14 +88,14 @@
 
     window.addEventListener('tizenhwkey', function(ev) {
         if (ev.keyName === 'back') {
-            if (Math.round(offset / length * 100) == progressBarWidget.value()) {
+            if (Math.ceil(offset / length * 100) == progressBarWidget.value()) {
                 window.history.back();
                 return;
             }
             console.log("documents/books/" + dest + ".idx");
             var index = tizen.filesystem.openFile("documents/books/" + dest + ".idx", "w");
-            console.log(Math.round(length * progressBarWidget.value() / 100) + "/" + length)
-            index.writeString(Math.round(length * progressBarWidget.value() / 100) + "/" + length);
+            console.log(Math.ceil(length * progressBarWidget.value() / 100) + "/" + length)
+            index.writeString(Math.ceil(length * progressBarWidget.value() / 100) + "/" + length);
             index.close();
             var page = document.getElementsByClassName('ui-page-active')[1],
                 pageid = page ? page.id : '';
@@ -123,9 +124,10 @@
             minusBtn.addEventListener('click', minusBtnClickHandler);
             plusBtn.addEventListener('click', plusBtnClickHandler);
         }
-        progressBarWidget.value(Math.round(offset / length * 100));
+        progressBarWidget.value(Math.ceil(offset / length * 100));
         i = parseInt(progressBarWidget.value());
         resultDiv.innerHTML = i + '%';
+        originDiv.innerHTML = "origin: "+i + '%';
     }
 
     function pageHideHandler() {
